@@ -1,38 +1,49 @@
+from pprint import pprint as p
 o = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 unoccupied = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 u = 9
 f = ""
+s = ""
 oc = False
 player = 1
 prev = 1
 count = 0
-
-
+ 
+ 
 def printboard(a, b, c, d, e, f, g, h, i):
     print("""
 {} {} {}
 {} {} {}
 {} {} {}
 """.format(a, b, c, d, e, f, g, h, i))
-
-
+ 
+ 
 def main():
     print(f"2p Tic-Tac-Toe")
-    global f, player, o, oc, prev, count, u
+    global f, player, s, o, oc, prev, count, u
     while True:
         printboard(o[0], o[1], o[2], o[3], o[4], o[5], o[6], o[7], o[8])
-        f = ""
-        f = input(f"1st player(X)?")
-        player = 2
-        prev = 1
+        if player == 1:
+            f = ""
+            f = input(f"1st player(X)?")
+            player = 2
+            prev = 1
+        else:
+            s = ""
+            s = input(f"2nd player(O)?")
+            player = 1
+            prev = 2
         for i in range(len(unoccupied)):
-            if str(unoccupied[i]) in str(f):
+            if str(unoccupied[i]) in str(f) or str(unoccupied[i]) in str(s):
                 for x in range(len(o)):
                     oc = False
-                    if o[x] == f:
+                    if o[x] == f or o[x] == s:
                         del o[x]
                         oc = True
-                        o.insert(x, "O")
+                        if player == 1:
+                            o.insert(x, "O")
+                        elif player == 2:
+                            o.insert(x, "X")
                         break
                     else:
                         continue
@@ -44,24 +55,18 @@ def main():
                         player = 2
                     break
                 u -= 1
-                print("Square Taken!")
+                p("Square Taken!")
                 # Win algorithm
                 # =begin
                 if u == 0:
                     print(f"Draw")
                     printboard(o[0], o[1], o[2], o[3], o[4], o[5], o[6], o[7], o[8])
                     exit()
-                if o[0] == "X" and o[1] == "X" and o[2] == "X" or o[3] == "X" and o[4] == "X" and o[5] == "X" or o[
-                    6] == "X" and o[7] == "X" and o[8] == "X" or o[0] == "X" and o[3] == "X" and o[6] == "X" or o[
-                    1] == "X" and o[4] == "X" and o[7] == "X" or o[2] == "X" and o[5] == "X" and o[8] == "X" or o[
-                    0] == "X" and o[4] == "X" and o[8] == "X" or o[2] == "X" and o[4] == "X" and o[6] == "X":
+                if o[0] == "X" and o[1] == "X" and o[2] == "X" or o[3] == "X" and o[4] == "X" and o[5] == "X" or o[6] == "X" and o[7] == "X" and o[8] == "X" or o[0] == "X" and o[3] == "X" and o[6] == "X" or o[1] == "X" and o[4] == "X" and o[7] == "X" or o[2] == "X" and o[5] == "X" and o[8] == "X" or o[0] == "X" and o[4] == "X" and o[8] == "X" or o[2] == "X" and o[4] == "X" and o[6] == "X":
                     print(f"First player Wins!")
                     printboard(o[0], o[1], o[2], o[3], o[4], o[5], o[6], o[7], o[8])
                     exit()
-                elif o[0] == "O" and o[1] == "O" and o[2] == "O" or o[3] == "O" and o[4] == "O" and o[5] == "O" or o[
-                    6] == "O" and o[7] == "O" and o[8] == "O" or o[0] == "O" and o[3] == "O" and o[6] == "O" or o[
-                    1] == "O" and o[4] == "O" and o[7] == "O" or o[2] == "O" and o[5] == "O" and o[8] == "O" or o[
-                    0] == "O" and o[4] == "O" and o[8] == "O" or o[2] == "O" and o[4] == "O" and o[6] == "O":
+                elif o[0] == "O" and o[1] == "O" and o[2] == "O" or o[3] == "O" and o[4] == "O" and o[5] == "O" or o[6] == "O" and o[7] == "O" and o[8] == "O" or o[0] == "O" and o[3] == "O" and o[6] == "O" or o[1] == "O" and o[4] == "O" and o[7] == "O" or o[2] == "O" and o[5] == "O" and o[8] == "O" or o[0] == "O" and o[4] == "O" and o[8] == "O" or o[2] == "O" and o[4] == "O" and o[6] == "O":
                     print(f"Second player Wins!")
                     printboard(o[0], o[1], o[2], o[3], o[4], o[5], o[6], o[7], o[8])
                     exit()
@@ -69,6 +74,4 @@ def main():
                 break
             else:
                 continue
-
-
 main()
